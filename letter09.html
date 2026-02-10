@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Letter 09</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal" id="lock-screen">
+  <h2>Protected Letters</h2>
+  <p>Enter password:</p>
+  <input type="password" id="password">
+  <button onclick="unlock()">Unlock</button>
+  <p id="error" style="color:#ff3333;"></p>
+</div>
+
+<div class="terminal" id="letter-content" style="display:none; flex-direction: column;">
+  <h2>Letter 09 – Biblical Love</h2>
+  <p>
+    My love,  
+    “Love is patient, love is kind. It does not envy, it does not boast, it is not proud.”  
+    – 1 Corinthians 13:4  
+    Every time I read these words, I think of us.  
+    Your patience, your kindness, and the way you care for my heart  
+    remind me that true love is a gift, and I am endlessly grateful for you.  
+    <br><br>
+    I promise to honor this love, to grow together in faith and joy,  
+    and to always keep you close to my heart, my dearest.
+  </p>
+  <textarea id="notes" rows="5" placeholder="Your thoughts..."></textarea>
+</div>
+
+<script>
+const PASSWORD = "faith09";
+
+function unlock() {
+  const input = document.getElementById("password").value;
+  if(input === PASSWORD) {
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("letter-content").style.display = "flex";
+    loadNotes();
+  } else {
+    document.getElementById("error").innerText = "ACCESS DENIED";
+  }
+}
+
+function loadNotes() {
+  const notes = localStorage.getItem("letter09_notes");
+  if(notes) document.getElementById("notes").value = notes;
+}
+document.getElementById("notes").addEventListener("input", function() {
+  localStorage.setItem("letter09_notes", this.value);
+});
+</script>
+
+</body>
+</html>
