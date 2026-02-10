@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Letter 09</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal" id="lock-screen">
+  <h2>Chronione Listy</h2>
+  <p>Wpisz hasło:</p>
+  <input type="password" id="password">
+  <button onclick="unlock()">Odblokuj</button>
+  <p id="error" style="color:#ff3333;"></p>
+</div>
+
+<div class="terminal" id="letter-content" style="display:none; flex-direction: column;">
+  <h2>List 09 – Mojemu sercu</h2>
+  <p>
+    Nikolciu, gdy myślę o Tobie, czuję ciepło, które rozlewa się po całym moim ciele,  
+    jakby świat nagle stał się spokojniejszy, jaśniejszy i pełen barw.  
+    Każde Twoje słowo, Twój uśmiech, Twój delikatny gest sprawiają, że serce bije szybciej,  
+    a dusza śpiewa z radości.  
+    <br><br>
+    Skarbie słońce, pamiętam nasze wspólne poranki, gdy Twoja obecność była jak najpiękniejsza melodia,  
+    a króliczku, Twoje spojrzenie sprawiało, że wszystkie troski znikały,  
+    zostawało tylko my i nasza niekończąca się czułość.  
+    <br><br>
+    Chcę z Tobą iść przez życie, trzymając Cię za rękę,  
+    cieszyć się każdym uśmiechem, każdym wspólnym momentem,  
+    każdą drobną radością, która przypomina mi, jak wielkim darem jesteś.  
+    <br><br>
+    Kocham Cię za wszystko, czym jesteś – za Twoją siłę, czułość, za Twój humor i spokój,  
+    za to, że potrafisz rozjaśnić najciemniejszy dzień,  
+    i że wystarczy, abym spojrzał na Ciebie, a świat staje się lepszy.  
+    <br><br>
+    Niech każdy nasz dzień będzie zapisany w sercu, króliczku,  
+    a każda noc pełna marzeń o tym, co możemy razem przeżyć.  
+    Nikolciu, skarbie słońce, wiedz, że nic nie jest dla mnie ważniejsze niż Ty,  
+    i że każda chwila z Tobą jest najpiękniejszą poezją mojego życia.
+  </p>
+  <textarea id="notes" rows="6" placeholder="Twoje myśli..."></textarea>
+</div>
+
+<script>
+const PASSWORD = "nikol09";
+
+function unlock() {
+  const input = document.getElementById("password").value;
+  if(input === PASSWORD) {
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("letter-content").style.display = "flex";
+    loadNotes();
+  } else {
+    document.getElementById("error").innerText = "DOSTĘP ODRZUCONY";
+  }
+}
+
+function loadNotes() {
+  const notes = localStorage.getItem("letter09_notes");
+  if(notes) document.getElementById("notes").value = notes;
+}
+document.getElementById("notes").addEventListener("input", function() {
+  localStorage.setItem("letter09_notes", this.value);
+});
+</script>
+
+</body>
+</html>
