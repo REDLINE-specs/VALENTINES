@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine Access</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Fullscreen warning overlay */
+    #warning-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      color: #ff3333;
+      font-family: monospace;
+      font-size: 3rem;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      z-index: 9999;
+      animation: glitch 0.2s infinite;
+    }
+  </style>
+</head>
+<body>
+
+<div class="terminal" id="lock-screen">
+  <h1>Will you be my Valentine?</h1>
+  <p>Type YES or NO</p>
+  <input type="text" id="answer" placeholder="YES / NO">
+  <button onclick="unlock()">Enter</button>
+  <p id="error" style="color:#ff3333;"></p>
+</div>
+
+<div class="terminal" id="gallery-link" style="display:none;">
+  <h1>Access Granted 💖</h1>
+  <p><a class="btn" href="letters.html">Open Letters Database</a></p>
+</div>
+
+<div id="warning-overlay">REALLY? FUCK OFF THEN</div>
+
+<script>
+function unlock() {
+  const answer = document.getElementById("answer").value.trim().toUpperCase();
+  const error = document.getElementById("error");
+  const overlay = document.getElementById("warning-overlay");
+
+  if(answer === "YES") {
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("gallery-link").style.display = "flex";
+  } else if(answer === "NO") {
+    overlay.style.display = "flex";
+  } else {
+    error.innerText = "ACCESS DENIED";
+  }
+}
+</script>
+
+</body>
+</html>
