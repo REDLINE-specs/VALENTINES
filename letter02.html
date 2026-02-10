@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Letter 02</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal" id="lock-screen">
+  <h2>Chronione Listy</h2>
+  <p>Wpisz hasło:</p>
+  <input type="password" id="password">
+  <button onclick="unlock()">Odblokuj</button>
+  <p id="error" style="color:#ff3333;"></p>
+</div>
+
+<div class="terminal" id="letter-content" style="display:none; flex-direction: column;">
+  <h2>List 02 – Nasza przyszłość</h2>
+  <p>
+    Wyobrażam sobie nasze wspólne jutro, gdzie każdy dzień zaczyna się Twoim uśmiechem,  
+    a kończy cichym wieczorem przy lampce wina i Twoim dotykiem.  
+    Marzę o podróżach, o odkrywaniu świata razem,  
+    o domu pełnym śmiechu, miłości i drobnych, szczęśliwych chwil.  
+    <br><br>
+    Każdy plan, każda nadzieja jest piękniejsza, bo wiesz, że jesteś przy mnie.  
+    Chcę budować każdy dzień, każdą godzinę, z Tobą u boku,  
+    bez pośpiechu, bez strachu, tylko my i nasze marzenia.
+  </p>
+  <textarea id="notes" rows="5" placeholder="Twoje myśli..."></textarea>
+</div>
+
+<script>
+const PASSWORD = "future02";
+
+function unlock() {
+  const input = document.getElementById("password").value;
+  if(input === PASSWORD) {
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("letter-content").style.display = "flex";
+    loadNotes();
+  } else {
+    document.getElementById("error").innerText = "DOSTĘP ODRZUCONY";
+  }
+}
+
+function loadNotes() {
+  const notes = localStorage.getItem("letter02_notes");
+  if(notes) document.getElementById("notes").value = notes;
+}
+document.getElementById("notes").addEventListener("input", function() {
+  localStorage.setItem("letter02_notes", this.value);
+});
+</script>
+
+</body>
+</html>
