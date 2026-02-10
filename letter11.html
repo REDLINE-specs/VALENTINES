@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Letter 11</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal" id="lock-screen">
+  <h2>Protected Letters</h2>
+  <p>Enter password:</p>
+  <input type="password" id="password">
+  <button onclick="unlock()">Unlock</button>
+  <p id="error" style="color:#ff3333;"></p>
+</div>
+
+<div class="terminal" id="letter-content" style="display:none; flex-direction: column;">
+  <h2>Letter 11 – Playful Flirtation</h2>
+  <p>
+    I can’t stop thinking about your mischievous smile,  
+    the sparkle in your eyes when you tease me,  
+    and the little secrets only we share.  
+    You turn ordinary moments into adventures,  
+    and even when apart, I imagine the next time I’ll surprise you with a kiss.  
+    <br><br>
+    Life is brighter, lighter, and infinitely more fun with you.
+  </p>
+  <textarea id="notes" rows="5" placeholder="Your thoughts..."></textarea>
+</div>
+
+<script>
+const PASSWORD = "flirt11";
+
+function unlock() {
+  const input = document.getElementById("password").value;
+  if(input === PASSWORD) {
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("letter-content").style.display = "flex";
+    loadNotes();
+  } else {
+    document.getElementById("error").innerText = "ACCESS DENIED";
+  }
+}
+
+function loadNotes() {
+  const notes = localStorage.getItem("letter11_notes");
+  if(notes) document.getElementById("notes").value = notes;
+}
+document.getElementById("notes").addEventListener("input", function() {
+  localStorage.setItem("letter11_notes", this.value);
+});
+</script>
+
+</body>
+</html>
