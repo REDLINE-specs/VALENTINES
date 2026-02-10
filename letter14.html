@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Letter 14</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal" id="lock-screen">
+  <h2>Protected Letters</h2>
+  <p>Enter password:</p>
+  <input type="password" id="password">
+  <button onclick="unlock()">Unlock</button>
+  <p id="error" style="color:#ff3333;"></p>
+</div>
+
+<div class="terminal" id="letter-content" style="display:none; flex-direction: column;">
+  <h2>Letter 14 – Deep Connection</h2>
+  <p>
+    Beloved,  
+    I feel our hearts beat in rhythm, even when we are apart.  
+    There is a quiet understanding between us, a bond that words cannot fully capture.  
+    Your presence comforts me in ways I never knew I needed,  
+    and your love inspires me to be the best version of myself.  
+    <br><br>
+    Every glance, every smile, every shared silence reinforces the certainty  
+    that we were meant to find each other in this life.
+  </p>
+  <textarea id="notes" rows="5" placeholder="Your thoughts..."></textarea>
+</div>
+
+<script>
+const PASSWORD = "connection14";
+
+function unlock() {
+  const input = document.getElementById("password").value;
+  if(input === PASSWORD) {
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("letter-content").style.display = "flex";
+    loadNotes();
+  } else {
+    document.getElementById("error").innerText = "ACCESS DENIED";
+  }
+}
+
+function loadNotes() {
+  const notes = localStorage.getItem("letter14_notes");
+  if(notes) document.getElementById("notes").value = notes;
+}
+document.getElementById("notes").addEventListener("input", function() {
+  localStorage.setItem("letter14_notes", this.value);
+});
+</script>
+
+</body>
+</html>
