@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Letter 04</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal" id="lock-screen">
+  <h2>Chronione Listy</h2>
+  <p>Wpisz hasło:</p>
+  <input type="password" id="password">
+  <button onclick="unlock()">Odblokuj</button>
+  <p id="error" style="color:#ff3333;"></p>
+</div>
+
+<div class="terminal" id="letter-content" style="display:none; flex-direction: column;">
+  <h2>List 04 – Prawdziwe uczucia</h2>
+  <p>
+    Nigdy wcześniej nie czułem czegoś takiego –  
+    Twoja obecność sprawia, że wszystko staje się prostsze i piękniejsze.  
+    Moje serce bije szybciej na Twój widok, a każda myśl krąży wokół Ciebie.  
+    Wiem, że nasze uczucia są prawdziwe, szczere i niezniszczalne.  
+    <br><br>
+    Chcę, abyś wiedziała, że jesteś moim domem, moją inspiracją i najpiękniejszym darem,  
+    jaki życie mogło mi dać. Kocham Cię całym sercem.
+  </p>
+  <textarea id="notes" rows="5" placeholder="Twoje myśli..."></textarea>
+</div>
+
+<script>
+const PASSWORD = "true04";
+
+function unlock() {
+  const input = document.getElementById("password").value;
+  if(input === PASSWORD) {
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("letter-content").style.display = "flex";
+    loadNotes();
+  } else {
+    document.getElementById("error").innerText = "DOSTĘP ODRZUCONY";
+  }
+}
+
+function loadNotes() {
+  const notes = localStorage.getItem("letter04_notes");
+  if(notes) document.getElementById("notes").value = notes;
+}
+document.getElementById("notes").addEventListener("input", function() {
+  localStorage.setItem("letter04_notes", this.value);
+});
+</script>
+
+</body>
+</html>
