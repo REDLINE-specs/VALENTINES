@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Letter 08</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal" id="lock-screen">
+  <h2>Chronione Listy</h2>
+  <p>Wpisz hasło:</p>
+  <input type="password" id="password">
+  <button onclick="unlock()">Odblokuj</button>
+  <p id="error" style="color:#ff3333;"></p>
+</div>
+
+<div class="terminal" id="letter-content" style="display:none; flex-direction: column;">
+  <h2>List 08 – Prawdziwa miłość</h2>
+  <p>
+    Moje serce należy do Ciebie bezwarunkowo,  
+    każda myśl o Tobie wypełnia mnie spokojem i szczęściem.  
+    Kocham Cię za wszystko, czym jesteś – za Twój uśmiech, Twój głos, Twój sposób patrzenia na świat.  
+    <br><br>
+    Z Tobą każda chwila jest prawdziwa, każda emocja intensywna,  
+    i wiem, że żadne słowa nie oddadzą tego, co czuję.  
+    Jesteś moim wszystkim, i pragnę Ci to powtarzać każdego dnia.
+  </p>
+  <textarea id="notes" rows="5" placeholder="Twoje myśli..."></textarea>
+</div>
+
+<script>
+const PASSWORD = "love08";
+
+function unlock() {
+  const input = document.getElementById("password").value;
+  if(input === PASSWORD) {
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("letter-content").style.display = "flex";
+    loadNotes();
+  } else {
+    document.getElementById("error").innerText = "DOSTĘP ODRZUCONY";
+  }
+}
+
+function loadNotes() {
+  const notes = localStorage.getItem("letter08_notes");
+  if(notes) document.getElementById("notes").value = notes;
+}
+document.getElementById("notes").addEventListener("input", function() {
+  localStorage.setItem("letter08_notes", this.value);
+});
+</script>
+
+</body>
+</html>
