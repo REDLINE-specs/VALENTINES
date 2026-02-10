@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Letter 10</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal" id="lock-screen">
+  <h2>Protected Letters</h2>
+  <p>Enter password:</p>
+  <input type="password" id="password">
+  <button onclick="unlock()">Unlock</button>
+  <p id="error" style="color:#ff3333;"></p>
+</div>
+
+<div class="terminal" id="letter-content" style="display:none; flex-direction: column;">
+  <h2>Letter 10 – Sweet Reflections</h2>
+  <p>
+    Sometimes I catch myself smiling for no reason, and then I realize it’s you.  
+    Your laughter echoes in my mind like a favorite melody,  
+    and your touch lingers in my memory long after we part.  
+    Every little gesture, every whispered word,  
+    reminds me how lucky I am to share this life with you.  
+    <br><br>
+    I hope that no matter where life leads us,  
+    we can always return to this quiet space of understanding,  
+    where just being together is enough to feel infinite.
+  </p>
+  <textarea id="notes" rows="5" placeholder="Your thoughts..."></textarea>
+</div>
+
+<script>
+const PASSWORD = "sweet10";
+
+function unlock() {
+  const input = document.getElementById("password").value;
+  if(input === PASSWORD) {
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("letter-content").style.display = "flex";
+    loadNotes();
+  } else {
+    document.getElementById("error").innerText = "ACCESS DENIED";
+  }
+}
+
+function loadNotes() {
+  const notes = localStorage.getItem("letter10_notes");
+  if(notes) document.getElementById("notes").value = notes;
+}
+document.getElementById("notes").addEventListener("input", function() {
+  localStorage.setItem("letter10_notes", this.value);
+});
+</script>
+
+</body>
+</html>
