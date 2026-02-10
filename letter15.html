@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Letter 15</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal" id="lock-screen">
+  <h2>Protected Letters</h2>
+  <p>Enter password:</p>
+  <input type="password" id="password">
+  <button onclick="unlock()">Unlock</button>
+  <p id="error" style="color:#ff3333;"></p>
+</div>
+
+<div class="terminal" id="letter-content" style="display:none; flex-direction: column;">
+  <h2>Letter 15 – Passionate Desire</h2>
+  <p>
+    My love,  
+    Every inch of me aches for you.  
+    I crave the heat of your touch, the whisper of your breath against my skin,  
+    the way your body responds to mine like we were made to fit together.  
+    <br><br>
+    I dream of tracing every curve,  
+    of holding you close until the world disappears,  
+    of surrendering to the fire that only we ignite.  
+    Tonight, in my thoughts, you are mine entirely,  
+    and I am yours, utterly, passionately, endlessly.
+  </p>
+  <textarea id="notes" rows="6" placeholder="Your thoughts..."></textarea>
+</div>
+
+<script>
+const PASSWORD = "desire15";
+
+function unlock() {
+  const input = document.getElementById("password").value;
+  if(input === PASSWORD) {
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("letter-content").style.display = "flex";
+    loadNotes();
+  } else {
+    document.getElementById("error").innerText = "ACCESS DENIED";
+  }
+}
+
+function loadNotes() {
+  const notes = localStorage.getItem("letter15_notes");
+  if(notes) document.getElementById("notes").value = notes;
+}
+document.getElementById("notes").addEventListener("input", function() {
+  localStorage.setItem("letter15_notes", this.value);
+});
+</script>
+
+</body>
+</html>
