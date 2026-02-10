@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Letter 07</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal" id="lock-screen">
+  <h2>Chronione Listy</h2>
+  <p>Wpisz hasło:</p>
+  <input type="password" id="password">
+  <button onclick="unlock()">Odblokuj</button>
+  <p id="error" style="color:#ff3333;"></p>
+</div>
+
+<div class="terminal" id="letter-content" style="display:none; flex-direction: column;">
+  <h2>List 07 – Pożądanie</h2>
+  <p>
+    Każde spojrzenie w Twoje oczy sprawia, że świat staje się cichy,  
+    a serce bije szybciej niż kiedykolwiek.  
+    Twoje dotyki i szeptane słowa wywołują dreszcze po całym ciele,  
+    sprawiając, że chcę być blisko Ciebie bez końca.  
+    <br><br>
+    Marzę o nocy, gdy zostaniemy sami,  
+    gdy każdy gest i każdy oddech będzie tylko nasz,  
+    a czas zatrzyma się, byśmy mogli poczuć siebie w pełni.
+  </p>
+  <textarea id="notes" rows="5" placeholder="Twoje myśli..."></textarea>
+</div>
+
+<script>
+const PASSWORD = "hot07";
+
+function unlock() {
+  const input = document.getElementById("password").value;
+  if(input === PASSWORD) {
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("letter-content").style.display = "flex";
+    loadNotes();
+  } else {
+    document.getElementById("error").innerText = "DOSTĘP ODRZUCONY";
+  }
+}
+
+function loadNotes() {
+  const notes = localStorage.getItem("letter07_notes");
+  if(notes) document.getElementById("notes").value = notes;
+}
+document.getElementById("notes").addEventListener("input", function() {
+  localStorage.setItem("letter07_notes", this.value);
+});
+</script>
+
+</body>
+</html>
